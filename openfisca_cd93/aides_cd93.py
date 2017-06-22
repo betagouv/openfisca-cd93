@@ -20,7 +20,7 @@ class resident_93(Variable):
     entity = Menage
     definition_period = MONTH
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         period = period.first_month
         depcom = simulation.calculate('depcom', period)
 
@@ -41,7 +41,7 @@ class adpa_eligibilite(Variable):
     entity = Individu
     definition_period = MONTH
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         period = period.first_month
         age = simulation.calculate('age', period)
         resident_93 = simulation.calculate('resident_93', period)
@@ -57,7 +57,7 @@ class adpa_base_ressources_i(Variable):
     entity = Individu
     definition_period = MONTH
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         period = period.first_month
         previous_year = period.start.period('year').offset(-1)
         salaire_imposable = simulation.calculate_add('salaire_imposable', period.n_2)
@@ -84,7 +84,7 @@ class adpa_base_ressources(Variable):
     entity = Famille
     definition_period = MONTH
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         period = period.first_month
         adpa_base_ressources_i = simulation.compute('adpa_base_ressources_i', period)
         adpa_base_ressources = self.sum_by_entity(adpa_base_ressources_i)
@@ -97,7 +97,7 @@ class adpa(Variable):
     entity = Famille
     definition_period = MONTH
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         period = period.first_month
 
         adpa_eligibilite_holder = simulation.compute('adpa_eligibilite', period)
