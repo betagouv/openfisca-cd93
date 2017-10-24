@@ -12,6 +12,9 @@ setup(
         'OpenFisca-Core >= 17, < 18',
         'OpenFisca-France >= 18.9, < 19'
     ],
+    extras_require = {
+        'test': 'nose'
+    },
     classifiers=[
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
